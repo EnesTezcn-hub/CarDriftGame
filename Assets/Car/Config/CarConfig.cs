@@ -15,6 +15,11 @@ public class CarConfig
     public float lateralGrip = 8f;
     public float lateralForceHeight = 0.5f;
 
+    [Header("Drift Tuning")]
+    // DriftAmount = 1 iken hedeflenen grip. Drift'te araba daha cok yana kaysin diye
+    // baseline lateralGrip'ten dusuk. (Asama 6)
+    public float driftGrip = 4f;
+
     [Header("Drag")]
     public float forwardDrag = 2f;
     public float angularDrag = 5f;

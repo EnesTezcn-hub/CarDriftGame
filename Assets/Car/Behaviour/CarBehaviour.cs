@@ -14,11 +14,15 @@ public class CarBehaviour : MonoBehaviour
     public float CurrentForwardDrag { get; private set; }
     public float CurrentAngularControl { get; private set; }
 
-    public void Evaluate(float throttleInput, float steerInput)
+    public void Evaluate(float throttleInput, float steerInput, float driftAmount)
     {
         CurrentAcceleration = config.acceleration;
         CurrentSteeringPower = config.turnSpeed;
-        CurrentGrip = config.lateralGrip;
+
+        // Asama 6: ILK ve SIMDILIK TEK drift parametresi.
+        // driftAmount 0 -> lateralGrip, driftAmount 1 -> driftGrip.
+        CurrentGrip = Mathf.Lerp(config.lateralGrip, config.driftGrip, driftAmount);
+
         CurrentLateralForceHeight = config.lateralForceHeight;
         CurrentForwardDrag = config.forwardDrag;
         CurrentAngularControl = config.angularDrag;

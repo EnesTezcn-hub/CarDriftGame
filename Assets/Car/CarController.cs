@@ -35,8 +35,8 @@ public class CarController : MonoBehaviour
         //    Asama 5: sadece olcum. Araba davranisi degismemeli.)
         driftEvaluator.Evaluate(carInput, carPhysics);
 
-        // 3. Behaviour karar verir. (Asama 6'da driftAmount buraya gececek.)
-        carBehaviour.Evaluate(carInput.ThrottleInput, carInput.SteerInput);
+        // 3. Behaviour karar verir. (Asama 6: driftAmount artik grip'i etkiliyor.)
+        carBehaviour.Evaluate(carInput.ThrottleInput, carInput.SteerInput, driftEvaluator.DriftAmount);
 
         carPhysics.ApplyMovement(carInput.ThrottleInput, carBehaviour.CurrentAcceleration);
         carPhysics.ApplySteering(carInput.SteerInput, carBehaviour.CurrentSteeringPower);
@@ -104,6 +104,12 @@ public class CarController : MonoBehaviour
             $"  steer {driftEvaluator.DebugSteerFactor:F2}  " +
             $"lateral {driftEvaluator.DebugLateralFactor:F2}  " +
             $"speed {driftEvaluator.DebugSpeedFactor:F2}",
+            style
+        );
+
+        GUI.Label(
+            new Rect(250, 270, 500, 40),
+            $"Current Grip:      {carBehaviour.CurrentGrip:F3}",
             style
         );
     }
