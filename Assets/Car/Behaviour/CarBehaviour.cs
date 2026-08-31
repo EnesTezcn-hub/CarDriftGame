@@ -17,11 +17,12 @@ public class CarBehaviour : MonoBehaviour
     public void Evaluate(float throttleInput, float steerInput, float driftAmount)
     {
         CurrentAcceleration = config.acceleration;
-        CurrentSteeringPower = config.turnSpeed;
 
-        // Asama 6: ILK ve SIMDILIK TEK drift parametresi.
-        // driftAmount 0 -> lateralGrip, driftAmount 1 -> driftGrip.
+        // Asama 6: driftAmount 0 -> lateralGrip, driftAmount 1 -> driftGrip.
         CurrentGrip = Mathf.Lerp(config.lateralGrip, config.driftGrip, driftAmount);
+
+        // Asama 10: drift'te steering biraz artar (araba aciyi cevirebilsin).
+        CurrentSteeringPower = Mathf.Lerp(config.turnSpeed, config.driftTurnSpeed, driftAmount);
 
         CurrentLateralForceHeight = config.lateralForceHeight;
         CurrentForwardDrag = config.forwardDrag;

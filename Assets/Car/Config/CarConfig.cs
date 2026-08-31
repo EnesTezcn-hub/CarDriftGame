@@ -20,6 +20,11 @@ public class CarConfig
     // baseline lateralGrip'ten dusuk. (Asama 6)
     public float driftGrip = 4f;
 
+    // DriftAmount = 1 iken hedeflenen steering power. Drift'te araba daha keskin
+    // donebilsin diye baseline turnSpeed'ten yuksek. KUCUK artisla basla (spin riski).
+    // (Asama 10)
+    public float driftTurnSpeed = 3300f;
+
     [Header("Drag")]
     public float forwardDrag = 2f;
     public float angularDrag = 5f;

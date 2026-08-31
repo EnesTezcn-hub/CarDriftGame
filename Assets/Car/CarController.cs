@@ -112,5 +112,11 @@ public class CarController : MonoBehaviour
             $"Current Grip:      {carBehaviour.CurrentGrip:F3}",
             style
         );
+
+        GUI.Label(
+            new Rect(250, 300, 500, 40),
+            $"Current Steering:  {carBehaviour.CurrentSteeringPower:F0}",
+            style
+        );
     }
 }
