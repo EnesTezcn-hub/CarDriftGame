@@ -10,6 +10,30 @@ public class CarPhysics : MonoBehaviour
     public float DebugLateralVelocity { get; private set; }
     public float DebugLateralForce { get; private set; }
 
+    // Vehicle state — "Rigidbody su anda fiziksel olarak ne yapiyor?"
+    // DriftEvaluator bu degerleri okur; kendi Rigidbody hesabini yapmaz.
+    public float ForwardVelocity { get; private set; }
+    public float LateralVelocity { get; private set; }
+    public float Speed { get; private set; }
+    public float YawVelocity { get; private set; }
+
+    // Rigidbody verilerini okuyup arac durumunu gunceller.
+    // CarController.FixedUpdate en basinda cagrilmali.
+    public void UpdateVehicleState()
+    {
+        Vector3 localVelocity =
+            transform.InverseTransformDirection(rb.linearVelocity);
+
+        ForwardVelocity = localVelocity.z;
+        LateralVelocity = localVelocity.x;
+        Speed = rb.linearVelocity.magnitude;
+
+        Vector3 localAngularVelocity =
+            transform.InverseTransformDirection(rb.angularVelocity);
+
+        YawVelocity = localAngularVelocity.y;
+    }
+
     public void ApplyMovement(float throttleInput, float acceleration)
     {
         rb.AddForce(

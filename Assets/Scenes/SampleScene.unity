@@ -151,6 +151,37 @@ Transform:
   - {fileID: 1319791170}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &293019475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 293019476}
+  m_Layer: 0
+  m_Name: CarVisual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &293019476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293019475}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1681263200}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,8 +268,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15403037, y: 0.20094444, z: -0.035919294, w: 0.96675014}
-  m_LocalPosition: {x: -1.911, y: 3.067, z: -5.615}
+  m_LocalRotation: {x: 0.25738904, y: 0.122799255, z: -0.032996576, w: 0.95790523}
+  m_LocalPosition: {x: -4.377569, y: 6.122696, z: -9.176964}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -557,6 +588,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1765005737}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1015812925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1015812926}
+  m_Layer: 0
+  m_Name: CarTires
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1015812926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015812925}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1681263200}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1295837661
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,7 +758,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.1543, y: -1.49, z: -0.66113}
-  m_LocalScale: {x: 1.7849, y: 1.5, z: 12}
+  m_LocalScale: {x: 3.5698, y: 1.5, z: 12}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 46743478}
@@ -731,6 +793,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1765005737}
+  - {fileID: 293019476}
+  - {fileID: 1015812926}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1765005733
@@ -747,7 +811,10 @@ GameObject:
   - component: {fileID: 1765005734}
   - component: {fileID: 1765005739}
   - component: {fileID: 1765005738}
+  - component: {fileID: 1765005742}
+  - component: {fileID: 1765005741}
   - component: {fileID: 1765005740}
+  - component: {fileID: 1765005743}
   m_Layer: 0
   m_Name: CarBody
   m_TagString: Untagged
@@ -897,7 +964,7 @@ MonoBehaviour:
   rearLeft: {fileID: 938381898}
   rearRight: {fileID: 1295837662}
   suspensionLength: 0.5
-  springStrength: 25000
+  springStrength: 16000
   damperStrength: 3000
 --- !u!114 &1765005740
 MonoBehaviour:
@@ -908,11 +975,58 @@ MonoBehaviour:
   m_GameObject: {fileID: 1765005733}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2135052c339944ca58f1c7b7a3b43ad6, type: 3}
+  m_Script: {fileID: 11500000, guid: 157caf2634a814e0cbdff5970f20ae13, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarMovement
+  m_EditorClassIdentifier: Assembly-CSharp::CarController
+  carInput: {fileID: 1765005742}
+  carBehaviour: {fileID: 0}
+  carPhysics: {fileID: 1765005741}
+  driftEvaluator: {fileID: 0}
+--- !u!114 &1765005741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765005733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c2489005ebf446abe50fa8a0214b47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarPhysics
   rb: {fileID: 1765005738}
-  acceleration: 8000
+--- !u!114 &1765005742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765005733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19f3603f9495049c2991d07b7ad0eb3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarInput
+  maxDragDistance: 200
+--- !u!114 &1765005743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765005733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adc7da43e7674cbbb11bb21de410ea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarBehaviour
+  config:
+    acceleration: 8000
+    turnSpeed: 3000
+    lateralGrip: 8
+    lateralForceHeight: 0.5
+    forwardDrag: 1
+    angularDrag: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
