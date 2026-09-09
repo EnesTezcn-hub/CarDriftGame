@@ -48,75 +48,42 @@ public class CarController : MonoBehaviour
 
     void OnGUI()
     {
-        GUIStyle style = new GUIStyle();
+        // Sag ust kosede kompakt debug listesi.
+        const float w = 300f;
+        const float h = 22f;
+        float x = Screen.width - w - 10f;
+        float y = 10f;
 
-        style.fontSize = 24;
-        style.normal.textColor = Color.yellow;
+        GUIStyle style = new GUIStyle
+        {
+            fontSize = 16,
+            alignment = TextAnchor.MiddleRight
+        };
 
-        // Drift sisteminin ilk doneminde bu degerler kritik.
-        GUI.Label(
-            new Rect(250, 20, 500, 40),
-            $"Steer Input:       {carInput.SteerInput:F3}",
-            style
-        );
+        void Line(string text, Color color)
+        {
+            style.normal.textColor = color;
+            GUI.Label(new Rect(x, y, w, h), text, style);
+            y += h;
+        }
 
-        GUI.Label(
-            new Rect(250, 50, 500, 40),
-            $"Forward Velocity:  {carPhysics.ForwardVelocity:F3}",
-            style
-        );
+        Line($"Throttle Input    {carInput.ThrottleInput:F2}   (lvl {carInput.ThrottleLevel:F2})", Color.yellow);
+        Line($"Raw Scroll        {carInput.DebugRawScroll:F3}", Color.yellow);
+        Line($"Steer Input       {carInput.SteerInput:F3}", Color.yellow);
+        Line($"Forward Velocity  {carPhysics.ForwardVelocity:F3}", Color.yellow);
+        Line($"Lateral Velocity  {carPhysics.LateralVelocity:F3}", Color.yellow);
+        Line($"Speed             {carPhysics.Speed:F3}", Color.yellow);
+        Line($"Yaw Velocity      {carPhysics.YawVelocity:F3}", Color.yellow);
+        Line($"Slip Angle        {carPhysics.SlipAngle:F1}", Color.yellow);
+        Line($"Lateral Force     {carPhysics.DebugLateralForce:F3}", Color.yellow);
 
-        GUI.Label(
-            new Rect(250, 80, 500, 40),
-            $"Lateral Velocity:  {carPhysics.LateralVelocity:F3}",
-            style
-        );
+        y += 6f;
+        Line($"Drift Amount      {driftEvaluator.DriftAmount:F3}", Color.cyan);
+        Line($"steer {driftEvaluator.DebugSteerFactor:F2}  lateral {driftEvaluator.DebugLateralFactor:F2}  speed {driftEvaluator.DebugSpeedFactor:F2}", Color.cyan);
 
-        GUI.Label(
-            new Rect(250, 110, 500, 40),
-            $"Speed:             {carPhysics.Speed:F3}",
-            style
-        );
-
-        GUI.Label(
-            new Rect(250, 140, 500, 40),
-            $"Yaw Velocity:      {carPhysics.YawVelocity:F3}",
-            style
-        );
-
-        GUI.Label(
-            new Rect(250, 170, 500, 40),
-            $"Lateral Force:     {carPhysics.DebugLateralForce:F3}",
-            style
-        );
-
-        // Asama 5: DriftAmount sadece izleniyor, Behaviour'a bagli degil.
-        style.normal.textColor = Color.cyan;
-
-        GUI.Label(
-            new Rect(250, 210, 500, 40),
-            $"Drift Amount:      {driftEvaluator.DriftAmount:F3}",
-            style
-        );
-
-        GUI.Label(
-            new Rect(250, 240, 600, 40),
-            $"  steer {driftEvaluator.DebugSteerFactor:F2}  " +
-            $"lateral {driftEvaluator.DebugLateralFactor:F2}  " +
-            $"speed {driftEvaluator.DebugSpeedFactor:F2}",
-            style
-        );
-
-        GUI.Label(
-            new Rect(250, 270, 500, 40),
-            $"Current Grip:      {carBehaviour.CurrentGrip:F3}",
-            style
-        );
-
-        GUI.Label(
-            new Rect(250, 300, 500, 40),
-            $"Current Steering:  {carBehaviour.CurrentSteeringPower:F0}",
-            style
-        );
+        y += 6f;
+        Line($"Current Grip      {carBehaviour.CurrentGrip:F3}", Color.white);
+        Line($"Current Steering  {carBehaviour.CurrentSteeringPower:F0}", Color.white);
+        Line($"Current AngularCtl {carBehaviour.CurrentAngularControl:F3}", Color.white);
     }
 }
