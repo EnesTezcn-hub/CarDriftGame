@@ -8,11 +8,30 @@ public class CarInput : MonoBehaviour
     // Bu kadar piksel drag = tam steerInput (-1 ya da +1)
     public float maxDragDistance = 200f;
 
+    [Header("Scroll Throttle")]
+    // Baslangic gaz seviyesi (0..1).
+    public float defaultThrottleLevel = 0f;
+    // Scroll ham degeri bu carpanla ThrottleLevel'a eklenir (trackpad'e gore ayarla).
+    public float scrollSensitivity = 0.05f;
+    // Ok tuslariyla ayarlarken her basista degisim.
+    public float keyboardThrottleStep = 0.1f;
+
     public float ThrottleInput { get; private set; }
     public float SteerInput { get; private set; }
 
+    // Scroll / ok tuslari ile ayarlanan gaz seviyesi (0..1). Dogrudan uygulanir.
+    public float ThrottleLevel { get; private set; }
+
+    // Debug: son okunan ham scroll degeri (trackpad sorununu teshis icin).
+    public float DebugRawScroll { get; private set; }
+
     Vector2 dragStartPosition;
     bool isDragging;
+
+    void Awake()
+    {
+        ThrottleLevel = Mathf.Clamp01(defaultThrottleLevel);
+    }
 
     void Update()
     {
@@ -22,8 +41,29 @@ public class CarInput : MonoBehaviour
 
     void ReadThrottleInput()
     {
-        float throttle = 0f;
+        // Trackpad iki parmak swipe / mouse tekerlegi -> gaz seviyesini ayarla.
+        // Ham degeri hassasiyetle olcekleyip biriktiriyoruz (Mac'te kucuk, mouse'ta buyuk gelir).
+        float scrollY = Mouse.current != null ? Mouse.current.scroll.ReadValue().y : 0f;
+        DebugRawScroll = scrollY;
 
+        if (Mathf.Abs(scrollY) > 0.0001f)
+        {
+            ThrottleLevel = Mathf.Clamp01(
+                ThrottleLevel + scrollY * scrollSensitivity
+            );
+        }
+
+        // Klavye: yukari/asagi ok ile gaz seviyesini ayarla.
+        if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+            ThrottleLevel = Mathf.Clamp01(ThrottleLevel + keyboardThrottleStep);
+
+        if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+            ThrottleLevel = Mathf.Clamp01(ThrottleLevel - keyboardThrottleStep);
+
+        // Gaz dogrudan uygulanir; coast icin seviyeyi 0'a cek.
+        float throttle = ThrottleLevel;
+
+        // Klavye override (dev / geri vites).
         if (Keyboard.current.wKey.isPressed)
             throttle = 1f;
 
