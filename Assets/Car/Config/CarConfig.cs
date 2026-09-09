@@ -25,6 +25,11 @@ public class CarConfig
     // (Asama 10)
     public float driftTurnSpeed = 3300f;
 
+    // DriftAmount = 1 iken hedeflenen angular control. Baseline angularDrag'ten dusuk:
+    // drift sirasinda yaw hareketine daha cok izin verilir, araba aciyi tutar,
+    // donusten sonra hemen toparlamaz. (Asama 11)
+    public float driftAngularControl = 2f;
+
     [Header("Drag")]
     public float forwardDrag = 2f;
     public float angularDrag = 5f;

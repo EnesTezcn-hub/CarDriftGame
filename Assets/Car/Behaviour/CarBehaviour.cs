@@ -24,8 +24,10 @@ public class CarBehaviour : MonoBehaviour
         // Asama 10: drift'te steering biraz artar (araba aciyi cevirebilsin).
         CurrentSteeringPower = Mathf.Lerp(config.turnSpeed, config.driftTurnSpeed, driftAmount);
 
+        // Asama 11: drift'te yaw bastirmasi azalir (araba drift acisini tutabilsin).
+        CurrentAngularControl = Mathf.Lerp(config.angularDrag, config.driftAngularControl, driftAmount);
+
         CurrentLateralForceHeight = config.lateralForceHeight;
         CurrentForwardDrag = config.forwardDrag;
-        CurrentAngularControl = config.angularDrag;
     }
 }

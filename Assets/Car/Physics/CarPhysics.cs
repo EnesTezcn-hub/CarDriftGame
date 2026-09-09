@@ -17,6 +17,10 @@ public class CarPhysics : MonoBehaviour
     public float Speed { get; private set; }
     public float YawVelocity { get; private set; }
 
+    // Arabanin baktigi yon ile gercekten hareket ettigi yon arasindaki fark (derece).
+    // ~0-3 duz surus, 5-10 hafif kayma, 10-20 drift, 20+ guclu drift / spin riski.
+    public float SlipAngle { get; private set; }
+
     // Rigidbody verilerini okuyup arac durumunu gunceller.
     // CarController.FixedUpdate en basinda cagrilmali.
     public void UpdateVehicleState()
@@ -32,6 +36,12 @@ public class CarPhysics : MonoBehaviour
             transform.InverseTransformDirection(rb.angularVelocity);
 
         YawVelocity = localAngularVelocity.y;
+
+        // Isaretli: negatif = sola kayiyor, pozitif = saga kayiyor.
+        // Cok yavasken slip angle anlamsiz (yon gurultusu) -> 0 kabul et.
+        SlipAngle = Speed < 0.5f
+            ? 0f
+            : Mathf.Atan2(LateralVelocity, Mathf.Abs(ForwardVelocity)) * Mathf.Rad2Deg;
     }
 
     public void ApplyMovement(float throttleInput, float acceleration)
